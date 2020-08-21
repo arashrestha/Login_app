@@ -1,0 +1,85 @@
+
+
+.full-conatiner{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.login-container{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height:100%; 
+}
+
+.form-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #202020;
+    border-radius: 10px;
+    opacity: 1;
+}
+form{
+    padding: 50px 0px;
+    text-align: center;
+}
+.form-container span{
+    color:white;
+    font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+}
+.form-container .form-group{
+    padding: 20px 20px 0px 20px;  
+}
+
+.input-field{
+     background-color:#303030 ;
+}
+.form-group:first-child{
+    padding-top:30px
+}
+
+
+input{
+    
+    font-size: 20px;
+    height: 1.25em;
+    width: 250px;
+    border:none;
+    background-color: inherit;
+    padding: 5px 5px;
+    color:white;
+    border-radius: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+input:focus{
+    outline:none
+}
+::placeholder{
+    color:white
+}
+button{
+    border: 1px solid #e35e6b;
+    background: transparent;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 8px 44px;
+    color: #e35e6b;
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+}
+.form-group p{
+        margin: 0;
+    padding-top: 8px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+
+
