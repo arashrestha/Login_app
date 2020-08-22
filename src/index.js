@@ -2,12 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './style.css'
-import App from './App';
+import Routes from './routes';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import reducers from './reducers'
+import thunk from 'redux-thunk'
+import { MuiThemeProvider } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/es';
+
+const store = createStore(reducers, applyMiddleware(thunk))
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: 'Roboto Slab, serif',
+  },
+})
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <MuiThemeProvider theme={theme}>
+        <Routes />
+      </MuiThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

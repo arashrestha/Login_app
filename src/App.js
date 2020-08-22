@@ -1,13 +1,26 @@
-import React from 'react';
-import Login from './components/Login'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux'
+import Homepage from './components/Homepage'
+function App(props) {
+
+  useEffect(() => {
+    !props.signedIn && !localStorage.getItem('token') && props.history.push('/login')
+  }, [])
 
 
-function App() {
+
   return (
     <div className='full-container'>
-      <Login />
+      <Homepage {...props} />
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    signedIn: state.auth.isSignedIn,
+    username: state.auth.username,
+  }
+}
+
+export default connect(mapStateToProps)(App);

@@ -8,7 +8,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height:100%; 
+    height:100vh; 
 }
 
 .form-container{
@@ -16,18 +16,18 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #202020;
+    background: rgb(32,32,32,0.7);
     border-radius: 10px;
     opacity: 1;
 }
 form{
-    padding: 50px 0px;
+    padding: 100px 0px;
     text-align: center;
 }
 .form-container span{
     color:white;
     font-size: 20px;
-        font-family: 'Times New Roman', Times, serif;
+        font-family: 'Roboto Slab', serif;
 }
 .form-container .form-group{
     padding: 20px 20px 0px 20px;  
@@ -44,20 +44,21 @@ form{
 input{
     
     font-size: 20px;
-    height: 1.25em;
     width: 250px;
     border:none;
     background-color: inherit;
-    padding: 5px 5px;
+    padding: 5px 0px;
+    padding-left: 20px ;
     color:white;
     border-radius: 20px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Roboto Slab', serif;
 }
-input:focus{
+input:focus, button:focus{
     outline:none
 }
 ::placeholder{
-    color:white
+    color:white;
+    font-size: 18px;
 }
 button{
     border: 1px solid #e35e6b;
@@ -67,17 +68,26 @@ button{
     padding: 8px 44px;
     color: #e35e6b;
     cursor: pointer;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Roboto Slab', serif;
 }
 .form-group p{
-        margin: 0;
     padding-top: 8px;
     text-align: center;
     color: white;
     font-size: 14px;
     cursor: pointer;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Roboto Slab', serif;
 }
+
+.welcome{
+    font-size: 1.5em;
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: 'Roboto Slab', serif;
+}
+
 
 
 
