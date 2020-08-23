@@ -6,7 +6,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button'
 import Slide from '@material-ui/core/Slide';
-import { DialogContent, DialogContentText, DialogActions } from '@material-ui/core';
+import { DialogContent, DialogContentText, DialogActions, IconButton } from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -14,8 +16,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 function Login(props) {
     const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [show, setShow] = useState(false)
+    const [showDialog, setShowDialog] = useState(false)
+    const [password, setPassword] = React.useState('');
+    const [showPassword, setShowPassword] = React.useState(false)
 
     useEffect(() => {
         props.signedIn && localStorage.getItem('token') && props.history.push('/homepage')
@@ -24,7 +27,6 @@ function Login(props) {
     const onChangeUsername = (e) => {
         setUsername(e.target.value)
     }
-
 
     const onChangePassword = (e) => {
         setPassword(e.target.value)
@@ -37,8 +39,6 @@ function Login(props) {
             formIsValid = false;
             alert('Invalid username')
         }
-
-
 
         if (!password) {
             formIsValid = false;
@@ -78,10 +78,12 @@ function Login(props) {
     }
 
     const onDialog = () => {
-        setShow(!show)
+        setShowDialog(!showDialog)
     }
-
-
+    const onShowPassword = () => {
+        console.log(showPassword)
+        setShowPassword(!showPassword)
+    }
 
     return (
 
@@ -108,12 +110,17 @@ function Login(props) {
                                 <img src={passwordIcon} alt='password' height='20px' style={{
                                     position: 'relative', top: '3px', left: '11px', color: 'white'
                                 }} />
-                                <input
-                                    type="password"
-                                    placeholder="Password"
-                                    value={password}
-                                    onChange={e => onChangePassword(e)}
-                                />
+                                <span>
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="Password"
+                                        value={password}
+                                        onChange={e => onChangePassword(e)}
+                                    />
+                                    <IconButton onClick={onShowPassword} style={{ position: 'absolute', right: '0%', top: '50%', transform: 'translateY(-50%' }} >
+                                        {showPassword ? <Visibility style={{ color: 'black' }} /> : <VisibilityOff style={{ color: 'black' }} />}
+                                    </IconButton>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -122,9 +129,9 @@ function Login(props) {
                             onClick={onSubmit}
                             className="btn btn-primary submit-button">LOGIN</button>
                         <p onClick={onDialog}>Forgot password?</p>
-                        {!!show &&
+                        {!!showDialog &&
                             <Dialog
-                                open={show}
+                                open={showDialog}
                                 TransitionComponent={Transition}
                                 keepMounted
                                 onClose={onDialog}

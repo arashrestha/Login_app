@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import Homepage from './components/Homepage'
+
 function App(props) {
 
   useEffect(() => {
     !props.signedIn && !localStorage.getItem('token') && props.history.push('/login')
   }, [])
-
-
 
   return (
     <div className='full-container'>
