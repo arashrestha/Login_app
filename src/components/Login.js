@@ -21,7 +21,8 @@ function Login(props) {
     const [showPassword, setShowPassword] = useState(false)
 
     useEffect(() => {
-        props.signedIn && localStorage.getItem('token') && props.history.push('/homepage')
+        console.log('called', props.signedIn, localStorage.getItem('token'))
+        props.signedIn && !!localStorage.getItem('token') && props.history.push('/homepage')
     }, [])
 
     const onChangeUsername = (e) => {
@@ -64,8 +65,10 @@ function Login(props) {
                 .then(resposne => resposne.json())
                 .then(res => {
                     const result = res.find(i => i.username === data.username && i.password === data.password)
-                    if (result)
+                    if (result) {
+                        localStorage.setItem('token', result.token)
                         resolve(result)
+                    }
                     else
                         alert('User not Authenticated')
                 })
