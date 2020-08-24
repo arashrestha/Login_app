@@ -1,7 +1,3 @@
-import { BaseURL } from '../config/config'
-import axios from 'axios'
-
-
 export function signIn(data) {
 
     return {

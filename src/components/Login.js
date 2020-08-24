@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import { tree, userIcon, passwordIcon, BaseURL } from '../config/config'
 import { connect } from 'react-redux'
 import { signIn } from '../actions'
@@ -10,15 +10,15 @@ import { DialogContent, DialogContentText, DialogActions, IconButton } from '@ma
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 function Login(props) {
     const [username, setUsername] = useState('')
     const [showDialog, setShowDialog] = useState(false)
-    const [password, setPassword] = React.useState('');
-    const [showPassword, setShowPassword] = React.useState(false)
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false)
 
     useEffect(() => {
         props.signedIn && localStorage.getItem('token') && props.history.push('/homepage')
@@ -63,16 +63,11 @@ function Login(props) {
             fetch(`${BaseURL}`)
                 .then(resposne => resposne.json())
                 .then(res => {
-                    res.map(i => {
-                        if (i.username === data.username && i.password === data.password) {
-                            const token = i.token
-                            localStorage.setItem('token', token)
-                            resolve(res)
-                        }
-                        else {
-                            alert('User not Authenticated')
-                        }
-                    })
+                    const result = res.find(i => i.username === data.username && i.password === data.password)
+                    if (result)
+                        resolve(result)
+                    else
+                        alert('User not Authenticated')
                 })
         })
     }

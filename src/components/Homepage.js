@@ -10,7 +10,7 @@ function Homepage(props) {
         <div className='homepage-conatiner'>
             <Header  {...props} />
             <div id='main-content'>
-                <img src={userIcon} height='100px' />
+                <img src={userIcon} height='100px' alt='user' />
                 <span className='welcome'><h1>Welcome {props.username}</h1></span>
             </div>
         </div>
