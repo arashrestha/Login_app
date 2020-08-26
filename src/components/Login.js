@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef, Fragment } from 'react';
 import { tree, userIcon, passwordIcon, BaseURL } from '../config/config'
 import { connect } from 'react-redux'
 import { signIn } from '../actions'
@@ -19,9 +19,10 @@ function Login(props) {
     const [showDialog, setShowDialog] = useState(false)
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false)
+    const [showError, setShowError] = useState({ U: false, P: false })
+
 
     useEffect(() => {
-        console.log('called', props.signedIn, localStorage.getItem('token'))
         props.signedIn && !!localStorage.getItem('token') && props.history.push('/homepage')
     }, [])
 
@@ -35,20 +36,22 @@ function Login(props) {
 
     const isValid = () => {
         let formIsValid = true;
-
+        setShowError(i => ({ U: false, P: false }))
+        console.log(showError, 'vali')
         if (!username) {
             formIsValid = false;
-            alert('Invalid username')
+            setShowError(i => ({ ...i, U: true }))
         }
 
         if (!password) {
             formIsValid = false;
-            alert('Invalid password')
+            setShowError(i => ({ ...i, P: true }))
         }
         return formIsValid
     }
 
     const onSubmit = () => {
+        console.log(showError, 'sub')
         if (isValid()) {
             login({ username, password })
                 .then(res => {
@@ -102,13 +105,14 @@ function Login(props) {
                                     onChange={e => onChangeUsername(e)}
                                 />
                             </div>
+                            {!!showError.U && <span> Username is incorrect</span>}
                         </div>
                         <div className="form-group">
                             <div className='input-field'>
                                 <img src={passwordIcon} alt='password' height='20px' style={{
                                     position: 'relative', top: '3px', left: '11px', color: 'white'
                                 }} />
-                                <span>
+                                <Fragment>
                                     <input
                                         type={showPassword ? "text" : "password"}
                                         placeholder="Password"
@@ -118,8 +122,9 @@ function Login(props) {
                                     <IconButton onClick={onShowPassword} style={{ position: 'absolute', right: '0%', top: '50%', transform: 'translateY(-50%' }} >
                                         {showPassword ? <Visibility style={{ color: 'black' }} /> : <VisibilityOff style={{ color: 'black' }} />}
                                     </IconButton>
-                                </span>
+                                </Fragment>
                             </div>
+                            {!!showError.P && <span> Password is incorrect</span>}
                         </div>
                     </div>
                     <div className='form-group'>

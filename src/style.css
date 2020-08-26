@@ -78,7 +78,8 @@ button{
     font-family: 'Roboto Slab', serif;
 }
 .form-group span{
-    color:red
+    color:#f0727f;
+    font-size: 16px;
 }
 #main-content{
  position: absolute; 
